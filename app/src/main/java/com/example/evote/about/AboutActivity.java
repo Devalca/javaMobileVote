@@ -1,4 +1,4 @@
-package com.example.evote.About;
+package com.example.evote.about;
 
 import androidx.appcompat.app.AppCompatActivity;
 

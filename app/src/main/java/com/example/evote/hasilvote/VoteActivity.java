@@ -35,22 +35,22 @@ public class VoteActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     String TAG;
-    private static ArrayList<Type> mArrayList = new ArrayList<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
-        BarChart barChart = (BarChart) findViewById(R.id.barchart);
+        BarChart barChart = findViewById(R.id.barchart);
         db = FirebaseFirestore.getInstance();
+
 
         db.collection("calon")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         int index = 0;
-                        ArrayList<String> labels = new ArrayList<String>();
+                        ArrayList<String> labels = new ArrayList<>();
                         ArrayList<BarEntry> jmhVote = new ArrayList<>();
                         BarDataSet bardataset = new BarDataSet(jmhVote, "Cells");
                         for (QueryDocumentSnapshot document : task.getResult()) {
