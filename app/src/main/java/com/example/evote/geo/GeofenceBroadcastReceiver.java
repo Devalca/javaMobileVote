@@ -3,17 +3,19 @@ package com.example.evote.geo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.evote.MapsActivity;
+import com.example.evote.MainActivity;
+import com.example.evote.StartsActivity;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
 
 import java.util.List;
 
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
-
+    String mob;
     private static final String TAG = "GeofenceBroadcastReceiv";
 
     @Override
@@ -36,14 +38,15 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                System.out.println("masuk");
+                Toast.makeText(context, "Selamat Datang Di Pemilihan BEM", Toast.LENGTH_SHORT).show();
+                notificationHelper.sendHighPriorityNotification("Silahkan Pilih Dengan Bijak", "Jangan Golput", MainActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 System.out.println("diam");
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
                 Toast.makeText(context, "Terima Kasih Telah Memberikan Suara Anda", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Terima Kasih Telah Memberikan Suara Anda", "", MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification("Terima Kasih Telah Memberikan Suara Anda", "", StartsActivity.class);
                 break;
         }
 
