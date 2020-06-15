@@ -39,7 +39,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
                 Toast.makeText(context, "Selamat Datang Di Pemilihan BEM", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("Silahkan Pilih Dengan Bijak", "Jangan Golput", MainActivity.class);
+                notificationHelper.sendHighPriorityNotification("Silahkan Klik Notifikasi Yang Muncul & Pilih Dengan Calon Bijak", "Jangan Golput", MainActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 System.out.println("diam");
