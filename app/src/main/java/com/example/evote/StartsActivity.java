@@ -100,7 +100,7 @@ public class StartsActivity extends FragmentActivity implements OnMapReadyCallba
     // (PEMBUATAN TANDA/MARK DI LOKASI PEMILIHAN)
 
     private void mobi() {
-        LatLng choser = new LatLng(-6.223208, 106.818056); // (LOKASI PEMILIHAN RUBAH SESUAI YAG DI INGINKAN)
+        LatLng choser = new LatLng(-6.227113, 106.826223); // (LOKASI PEMILIHAN RUBAH SESUAI YAG DI INGINKAN)
         addMarker(choser);
         addCircle(choser, GEOFENCE_RADIUS);
         addGeofence(choser, GEOFENCE_RADIUS);

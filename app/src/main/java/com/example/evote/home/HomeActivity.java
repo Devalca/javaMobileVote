@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.evote.StartsActivity;
 import com.example.evote.about.AboutActivity;
 import com.example.evote.R;
 import com.example.evote.hasilvote.VoteActivity;
@@ -39,6 +41,13 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     public String TAG;
     public String vote = "sudah";
+
+    int hoursToGo = 0;
+    int minutesToGo = 0;
+    int secondsToGo = 30;
+
+    int millisToGo = secondsToGo*1000+minutesToGo*1000*60+hoursToGo*1000*60*60;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +95,24 @@ public class HomeActivity extends AppCompatActivity {
         calonAdapter  = new CalonAdapter(calon_model);
         home_listview.setLayoutManager( new LinearLayoutManager( this ) );
         home_listview.setAdapter( calonAdapter );
+
+        new CountDownTimer(millisToGo,3000) {
+
+            @Override
+            public void onTick(long millis) {
+                int seconds = (int) (millis / 1000) % 60 ;
+                int minutes = (int) ((millis / (1000*60)) % 60);
+                int hours   = (int) ((millis / (1000*60*60)) % 24);
+            }
+
+            @Override
+            public void onFinish() {
+                Intent i = new Intent(HomeActivity.this, StartsActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+                finish();
+            }
+        }.start();
 
         db = FirebaseFirestore.getInstance( );
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
