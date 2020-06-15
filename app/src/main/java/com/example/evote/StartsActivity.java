@@ -7,20 +7,16 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.evote.geo.GeofenceHelper;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -56,6 +52,7 @@ public class StartsActivity extends FragmentActivity implements OnMapReadyCallba
         geofenceHelper = new GeofenceHelper(this);
     }
 
+    // (MENAMPILKAN LOKASI PEMILIHAN JIKA PERLU EDIT DI TAMPILAN)
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -64,6 +61,8 @@ public class StartsActivity extends FragmentActivity implements OnMapReadyCallba
         mobi();
 
     }
+
+    // (CEK DAN PERMINTAAN POP UP LOKASI SERVICE)
 
     private void enableUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -76,6 +75,8 @@ public class StartsActivity extends FragmentActivity implements OnMapReadyCallba
             }
         }
     }
+
+    // (PERMINTAAN IJIN LOKASI DAN GEOFENCE DI HP < 29 ANDROID VERSION & > 29 ANDROID VERSION)
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -96,14 +97,17 @@ public class StartsActivity extends FragmentActivity implements OnMapReadyCallba
         }
     }
 
+    // (PEMBUATAN TANDA/MARK DI LOKASI PEMILIHAN)
+
     private void mobi() {
-        LatLng choser = new LatLng(-6.223208, 106.818056);
-//        LatLng choser = new LatLng(48.8589, 2.29365);
+        LatLng choser = new LatLng(-6.223208, 106.818056); // (LOKASI PEMILIHAN RUBAH SESUAI YAG DI INGINKAN)
         addMarker(choser);
         addCircle(choser, GEOFENCE_RADIUS);
         addGeofence(choser, GEOFENCE_RADIUS);
     }
 
+
+    // (MENAMBAHKAN SISTEM RADIUS UNTUK TEMPAT PIMILIHAN)
 
     private void addGeofence(LatLng latLng, float radius) {
 
